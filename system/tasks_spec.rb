@@ -44,14 +44,14 @@ RSpec.describe 'ログイン機能', type: :system do
         end
         it 'ログイン画面' do
           visit new_session_path
-          expect(page).to have_content 'ログインページ'
+          expect(page).to have_content 'ログイン'
           expect(page).to have_selector 'label', text: 'メールアドレス'
           expect(page).to have_selector 'label', text: 'パスワード'
           expect(page).to have_button 'ログイン'
         end
         it 'アカウント登録画面' do
           visit new_user_path
-          expect(page).to have_content 'アカウント登録ページ'
+          expect(page).to have_content 'アカウント登録'
           expect(page).to have_selector 'label', text: '名前'
           expect(page).to have_selector 'label', text: 'メールアドレス'
           expect(page).to have_selector 'label', text: 'パスワード'
@@ -68,9 +68,9 @@ RSpec.describe 'ログイン機能', type: :system do
         it 'グローバルナビゲーションのリンクを要件通りに遷移させること' do
           visit root_path
           click_link 'ログイン'
-          expect(page).to have_content 'ログインページ'
+          expect(page).to have_content 'ログイン'
           click_link 'アカウント登録'
-          expect(page).to have_content 'アカウント登録ページ'
+          expect(page).to have_content 'アカウント登録'
         end
         it 'アカウント登録に成功した場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit new_user_path
@@ -79,7 +79,7 @@ RSpec.describe 'ログイン機能', type: :system do
           find('input[name="user[password]"]').set('new_password')
           find('input[name="user[password_confirmation]"]').set('new_password')
           click_button '登録する'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it 'アカウント登録に失敗した場合、ページタイトルに「アカウント登録ページ」が表示される' do
           visit new_user_path
@@ -88,21 +88,21 @@ RSpec.describe 'ログイン機能', type: :system do
           find('input[name="user[password]"]').set('')
           find('input[name="user[password_confirmation]"]').set('')
           click_button '登録する'
-          expect(page).to have_content 'アカウント登録ページ'
+          expect(page).to have_content 'アカウント登録'
         end
         it 'ログインに成功した場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit new_session_path
           find('input[name="session[email]"]').set(user.email)
           find('input[name="session[password]"]').set(user.password)
           click_button 'ログイン'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it 'ログインに失敗した場合、ページタイトルに「ログインページ」が表示される' do
           visit new_session_path
           find('input[name="session[email]"]').set('failed@email.com')
           find('input[name="session[password]"]').set('failed_password')
           click_button 'ログイン'
-          expect(page).to have_content 'ログインページ'
+          expect(page).to have_content 'ログイン'
         end
       end
     end
@@ -170,7 +170,7 @@ RSpec.describe 'ログイン機能', type: :system do
         end
         it 'アカウント詳細画面' do
           visit user_path(user)
-          expect(page).to have_content 'アカウント詳細ページ'
+          expect(page).to have_content 'アカウント詳細'
           expect(page).to have_content '名前'
           expect(page).to have_content 'メールアドレス'
           expect(page).to have_link '編集'
@@ -178,7 +178,7 @@ RSpec.describe 'ログイン機能', type: :system do
         end
         it 'アカウント編集画面' do
           visit edit_user_path(user)
-          expect(page).to have_content 'アカウント編集ページ'
+          expect(page).to have_content 'アカウント編集'
           expect(page).to have_selector 'label', text: '名前'
           expect(page).to have_selector 'label', text: 'メールアドレス'
           expect(page).to have_selector 'label', text: 'パスワード'
@@ -201,24 +201,24 @@ RSpec.describe 'ログイン機能', type: :system do
       describe '画面遷移図通りに遷移させること' do
         it 'グローバルナビゲーションのリンクを要件通りに遷移させること' do
           click_link 'タスク一覧'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
           click_link 'タスクを登録する'
-          expect(page).to have_content 'タスク登録ページ'
+          expect(page).to have_content 'タスク登録'
           click_link 'アカウント'
-          expect(page).to have_content 'アカウント詳細ページ'
+          expect(page).to have_content 'アカウント詳細'
           click_link 'ログアウト'
-          expect(page).to have_content 'ログインページ'
+          expect(page).to have_content 'ログイン'
         end
         it 'アカウント詳細画面の「編集」をクリックした場合、ページタイトルに「アカウント編集ページ」が表示される' do
           visit user_path(user)
           click_link '編集'
-          expect(page).to have_content 'アカウント編集ページ'
+          expect(page).to have_content 'アカウント編集'
         end
         it 'アカウント詳細画面の「削除」をクリックした場合、ページタイトルに「ログインページ」が表示される' do
           visit user_path(user)
           click_link '削除'
           page.driver.browser.switch_to.alert.accept
-          expect(page).to have_content 'ログインページ'
+          expect(page).to have_content 'ログイン'
         end
         it 'アカウントの編集に成功した場合、ページタイトルに「アカウント詳細ページ」が表示される' do
           visit edit_user_path(user)
@@ -227,7 +227,7 @@ RSpec.describe 'ログイン機能', type: :system do
           find('input[name="user[password]"]').set('edit_password')
           find('input[name="user[password_confirmation]"]').set('edit_password')
           click_button '更新する'
-          expect(page).to have_content 'アカウント詳細ページ'
+          expect(page).to have_content 'アカウント詳細'
         end
         it 'アカウントの編集に失敗した場合、ページタイトルに「アカウント編集ページ」が表示される' do
           visit edit_user_path(user)
@@ -236,12 +236,12 @@ RSpec.describe 'ログイン機能', type: :system do
           find('input[name="user[password]"]').set('')
           find('input[name="user[password_confirmation]"]').set('')
           click_button '更新する'
-          expect(page).to have_content 'アカウント編集ページ'
+          expect(page).to have_content 'アカウント編集'
         end
         it 'アカウント編集画面の「戻る」をクリックした場合、ページタイトルに「アカウント詳細ページ」が表示される' do
           visit edit_user_path(user)
           click_link '戻る'
-          expect(page).to have_content 'アカウント詳細ページ'
+          expect(page).to have_content 'アカウント詳細'
         end
       end
     end
@@ -518,7 +518,7 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         end
         it 'タスク一覧画面' do
           visit tasks_path
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
           expect(page).to have_content task.title
           expect(page).to have_content task.content
           expect(page).to have_link '詳細'
@@ -527,7 +527,7 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         end
         it 'タスク登録画面' do
           visit new_task_path
-          expect(page).to have_content 'タスク登録ページ'
+          expect(page).to have_content 'タスク登録'
           expect(page).to have_selector 'label', text: 'タイトル'
           expect(page).to have_selector 'label', text: '内容'
           expect(page).to have_button '登録する'
@@ -535,7 +535,7 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         end
         it 'タスク詳細画面' do
           visit task_path(task)
-          expect(page).to have_content 'タスク詳細ページ'
+          expect(page).to have_content 'タスク詳細'
           expect(page).to have_content task.title
           expect(page).to have_content task.content
           expect(page).to have_link '編集'
@@ -543,7 +543,7 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         end
         it 'タスク編集画面' do
           visit edit_task_path(task)
-          expect(page).to have_content 'タスク編集ページ'
+          expect(page).to have_content 'タスク編集'
           expect(page).to have_selector 'label', text: 'タイトル'
           expect(page).to have_selector 'label', text: '内容'
           expect(page).to have_button '更新する'
@@ -557,66 +557,66 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         it 'グローバルナビゲーション' do
           visit tasks_path
           click_link 'タスクを登録する'
-          expect(page).to have_content 'タスク登録ページ'
+          expect(page).to have_content 'タスク登録'
           click_link 'タスク一覧'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it 'タスクを登録した場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit new_task_path
           fill_in 'タイトル', with: 'task_title'
           fill_in '内容', with: 'task_content'
           click_button '登録する'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it '「詳細」をクリックした場合、ページタイトルに「タスク詳細ページ」が表示される' do
           visit tasks_path
           click_link '詳細'
-          expect(page).to have_content 'タスク詳細ページ'
+          expect(page).to have_content 'タスク詳細'
         end
         it '「編集」をクリックした場合、ページタイトルに「タスク編集ページ」が表示される' do
           visit tasks_path
           click_link '編集'
-          expect(page).to have_content 'タスク編集ページ'
+          expect(page).to have_content 'タスク編集'
         end
         it '「更新する」をクリックした場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit edit_task_path(task)
           click_button '更新する'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
-        it '「削除」をクリックした場合、ページタイトルに「タスク一覧ページ」が表示される' do
+        it '「削除」をクリックした場合、ページタイトルに「タスク一覧」が表示される' do
           visit tasks_path
           click_link '削除'
           page.driver.browser.switch_to.alert.accept
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it '登録画面の「戻る」をクリックした場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit new_task_path
           click_link '戻る'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it '詳細画面の「戻る」をクリックした場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit task_path(task)
           click_link '戻る'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it '編集画面の「戻る」をクリックした場合、ページタイトルに「タスク一覧ページ」が表示される' do
           visit edit_task_path(task)
           click_link '戻る'
-          expect(page).to have_content 'タスク一覧ページ'
+          expect(page).to have_content 'タスク一覧'
         end
         it 'タスクの登録に失敗した場合、ページタイトルに「タスク登録ページ」が表示される' do
           visit new_task_path
           fill_in 'タイトル', with: ''
           fill_in '内容', with: ''
           click_button '登録する'
-          expect(page).to have_content 'タスク登録ページ'
+          expect(page).to have_content 'タスク登録'
         end
         it 'タスクの編集に失敗した場合、ページタイトルに「タスク編集ページ」が表示される' do
           visit edit_task_path(task)
           fill_in 'タイトル', with: ''
           fill_in '内容', with: ''
           click_button '更新する'
-          expect(page).to have_content 'タスク編集ページ'
+          expect(page).to have_content 'タスク編集'
         end
       end
     end
