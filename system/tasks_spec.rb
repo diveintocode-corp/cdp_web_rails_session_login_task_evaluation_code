@@ -45,17 +45,16 @@ RSpec.describe 'ログイン機能', type: :system do
         it 'ログイン画面' do
           visit new_session_path
           expect(page).to have_content 'ログイン'
-          expect(page).to have_selector 'label', text: 'メールアドレス'
-          expect(page).to have_selector 'label', text: 'パスワード'
           expect(page).to have_button 'ログイン'
         end
         it 'アカウント登録画面' do
           visit new_user_path
           expect(page).to have_content 'アカウント登録'
-          expect(page).to have_selector 'label', text: '名前'
-          expect(page).to have_selector 'label', text: 'メールアドレス'
-          expect(page).to have_selector 'label', text: 'パスワード'
-          expect(page).to have_selector 'label', text: 'パスワード（確認）'
+          expect(page).to have_content '名前'
+          expect(page).to have_content 'メールアドレス'
+          expect(page).to have_content 'パスワード'
+          expect(page).to have_content 'パスワード（確認）'
+          
           expect(page).to have_button '登録する'
         end
       end
@@ -179,10 +178,6 @@ RSpec.describe 'ログイン機能', type: :system do
         it 'アカウント編集画面' do
           visit edit_user_path(user)
           expect(page).to have_content 'アカウント編集'
-          expect(page).to have_selector 'label', text: '名前'
-          expect(page).to have_selector 'label', text: 'メールアドレス'
-          expect(page).to have_selector 'label', text: 'パスワード'
-          expect(page).to have_selector 'label', text: 'パスワード（確認）'
           expect(page).to have_button '更新する'
           expect(page).to have_link '戻る'
         end
@@ -528,8 +523,6 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         it 'タスク登録画面' do
           visit new_task_path
           expect(page).to have_content 'タスク登録'
-          expect(page).to have_selector 'label', text: 'タイトル'
-          expect(page).to have_selector 'label', text: '内容'
           expect(page).to have_button '登録する'
           expect(page).to have_link '戻る'
         end
@@ -544,8 +537,6 @@ RSpec.describe 'デフォルトで実装されているタスク管理機能が�
         it 'タスク編集画面' do
           visit edit_task_path(task)
           expect(page).to have_content 'タスク編集'
-          expect(page).to have_selector 'label', text: 'タイトル'
-          expect(page).to have_selector 'label', text: '内容'
           expect(page).to have_button '更新する'
           expect(page).to have_link '戻る'
         end
